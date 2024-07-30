@@ -1,13 +1,33 @@
 // src/binary_search.ts
-function gerarNumerosAleatorios(n, min, max) {
-  const listaAleatoria2 = [];
+function generateRandomNumber(n, min, max) {
+  const randomList2 = [];
   for (let i = 0; i < n; i++) {
-    const numeroAleatorio = Math.floor(Math.random() * (max - min) + min);
-    listaAleatoria2.push(numeroAleatorio);
+    const randomNumber = Math.floor(Math.random() * (max - min) + min);
+    randomList2.push(randomNumber);
   }
-  return listaAleatoria2;
+  return randomList2;
 }
-var listaAleatoria = gerarNumerosAleatorios(64, 1, 100);
-console.log(listaAleatoria);
-var orderList = listaAleatoria.sort();
-console.log("lista ordenada", orderList);
+var randomList = generateRandomNumber(20, 1, 100);
+var randomListOrder = randomList.sort((a, b) => a - b);
+console.log("lista ordenada", randomListOrder);
+function getNumberList(number, list) {
+  let high = list.length - 1;
+  let low = 0;
+  while (high >= low) {
+    let count = 0;
+    console.log(count);
+    let medium = Math.ceil((low + high) / 2);
+    let guess = list[medium];
+    if (guess === number) {
+      console.log(`Encontrei o numero: ${guess}`);
+      return guess;
+    } else if (guess > number) {
+      high = medium - 1;
+    } else {
+      low = medium + 1;
+    }
+    count += 1;
+  }
+  return null;
+}
+console.log(getNumberList(20, randomListOrder));
