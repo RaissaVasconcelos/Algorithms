@@ -49,22 +49,26 @@ root.right.left.right = new TreeNode(12)
 root.right.right.left = new TreeNode(13)
 root.right.right.right = new TreeNode(14)
 
-console.log('root', root)
-
-// Retornar este ponto amanhã e compreender melhor a função
 function breadthFirstTraversal(root: TreeNode | null): number[] {
   if (!root) return [];
 
-  const result: number[] = [];
-  const queue: TreeNode[] = [root];
+  const result: number[] = []
+  const queue: TreeNode[] = [root]
 
-  while (queue.length > 0) {
-    const current = queue.shift()!;
-    result.push(current.tag);
-
-    if (current.left) queue.push(current.left);
-    if (current.right) queue.push(current.right);
+  while(queue.length > 0) {
+    // metodo shift vai pegar o primeiro elemento da fila e alterar o array original, o ! informa ao typescript para n retornar undefined 
+    const current = queue.shift()!
+    // o algoritmo funciona da seguinte forma, vai ser lido o primeira tag do no, apos isso os filhos são jogados
+    // para o final da fila, realimentando a fila, para a leitura ser realizada em toda a estrutura de arvore
+    console.log(current) // !!importante para entender
+    result.push(current.tag)
+    
+    // a leitura sempre vai ser da esquerda pra direita então começamos com a esquerda
+    if (current.left) queue.push(current.left)
+    if (current.right) queue.push(current.right)
   }
 
-  return result;
+  return result
 }
+
+console.log('retorno', breadthFirstTraversal(root))
